@@ -1,6 +1,7 @@
 # Ad Creative Optimizer
+![Dashboard demo: the learning robot pulls ahead of the random robot](docs/demo.gif)
 
-Two robots show the same ads to the same pretend visitors. One picks ads at random (a classic A/B test).
+Two robots show the same ads to the same pretend visitors. One picks ads at random (A/B test).
 The other uses **Thompson sampling**, a multi-armed bandit, to learn which ad gets clicked and show it more.
 The dashboard shows the learning robot pulling ahead in real time.
 
@@ -16,11 +17,10 @@ flowchart LR
 ```
 
 ## Why this exists
-Ad platforms like Smartly produce huge numbers of creative variants. Testing them with plain A/B tests wastes traffic
-on losing ads. A bandit shifts traffic to winners while it is still learning. This project is a small, honest model of that.
+Ad platforms produce huge numbers of creative variants. Testing them with plain A/B tests wastes traffic
+on losing ads. A bandit shifts traffic to winners while it is still learning. This project is a small model of that.
 
 ## Run it
-You need Node 22+ and Docker.
 
 ```bash
 # 1. start Postgres + Redpanda
@@ -28,8 +28,8 @@ docker compose -f infra/docker-compose.yml up -d
 
 # 2. API (terminal 1)
 cd apps/api && npm install
-npm run dev                      # simple mode: events go straight to Postgres
-# or: USE_KAFKA=true npm run dev  # full mode: events go through Kafka
+npm run dev                      # simple: events go straight to Postgres
+# or: USE_KAFKA=true npm run dev  # events go through Kafka
 
 # 3. Kafka consumer (terminal 2, only in Kafka mode)
 cd apps/api && USE_KAFKA=true npm run consumer
@@ -42,7 +42,7 @@ Create a campaign, press **Start visitors**, and watch.
 
 ## Tests
 ```bash
-cd apps/api && DATABASE_URL=postgres://ads:ads@localhost:5432/ads npm test
+cd apps/api && DATABASE_URL=postgres://ads:ads@localhost:5433/ads npm test
 cd apps/web && npm run build
 ```
 CI (GitHub Actions) runs typecheck, tests against a real Postgres, and the web build on every push.
