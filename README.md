@@ -1,4 +1,5 @@
 # Ad Creative Optimizer
+![CI](https://github.com/vj216/ad-creative-optimizer/actions/workflows/ci.yml/badge.svg)
 ![Dashboard demo: the learning robot pulls ahead of the random robot](docs/demo.gif)
 
 Two robots show the same ads to the same pretend visitors. One picks ads at random (A/B test).
